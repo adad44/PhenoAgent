@@ -1,0 +1,62 @@
+[
+  {
+    "name": "glucose",
+    "value": 108,
+    "unit": "mg/dL",
+    "ref_low": 70,
+    "ref_high": 99,
+    "flag": "H",
+    "date": "2026-04-01",
+    "source": "fixture"
+  },
+  {
+    "name": "hba1c",
+    "value": 5.8,
+    "unit": "%",
+    "ref_low": 4.0,
+    "ref_high": 5.6,
+    "flag": "H",
+    "date": "2026-04-01",
+    "source": "fixture"
+  },
+  {
+    "name": "ldl",
+    "value": 142,
+    "unit": "mg/dL",
+    "ref_low": 0,
+    "ref_high": 129,
+    "flag": "H",
+    "date": "2026-04-01",
+    "source": "fixture"
+  },
+  {
+    "name": "hdl",
+    "value": 38,
+    "unit": "mg/dL",
+    "ref_low": 40,
+    "ref_high": 60,
+    "flag": "L",
+    "date": "2026-04-01",
+    "source": "fixture"
+  },
+  {
+    "name": "triglycerides",
+    "value": 195,
+    "unit": "mg/dL",
+    "ref_low": 0,
+    "ref_high": 149,
+    "flag": "H",
+    "date": "2026-04-01",
+    "source": "fixture"
+  },
+  {
+    "name": "crp",
+    "value": 2.4,
+    "unit": "mg/L",
+    "ref_low": 0,
+    "ref_high": 3,
+    "flag": "N",
+    "date": "2026-04-01",
+    "source": "fixture"
+  }
+]

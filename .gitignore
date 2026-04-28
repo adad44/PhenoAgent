@@ -1,0 +1,9 @@
+.DS_Store
+backend/.env
+backend/.venv/
+backend/__pycache__/
+backend/.pytest_cache/
+frontend/.env
+frontend/.netlify/
+frontend/dist/
+frontend/node_modules/
