@@ -38,6 +38,7 @@ Live demo:
 - `npm run verify:production-ready` checks Convex production, Netlify production, and local deploy/provider credential presence without printing secret values; it currently fails because external credentials and Render deploy access are absent.
 - `npm run verify:live-services` is present for post-credential validation of live Claude output, nutrition AI scan, bloodwork PDF extraction, and WHOOP/Oura auth starts; it is expected to fail until Anthropic and provider credentials are configured.
 - `npm run configure:production-secrets` is present to apply available shell-provided credentials to Convex and Netlify production without printing secret values; `-- --dry-run` previews the variable names only.
+- `npm run verify:render` is present for Render Blueprint validation via Render CLI or the official Validate Blueprint API when Render access is available; without Render credentials it performs a local required-field check and reports the remaining access blocker.
 - GitHub draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on branch `codex/agents-implementation` without changing `main`.
 - GitHub Actions CI run `25372876003` passed for the current PR #1 head: install, typecheck, build, and dependency audit completed successfully.
 - Production Convex `SITE_URL` is set to `https://phenoagent-demo.netlify.app`; the dev Convex deployment remains pointed at `http://localhost:5173` for local development.
@@ -101,6 +102,7 @@ Live demo:
 | Production credential readiness check | `scripts/production-readiness.mjs`, `npm run verify:production-ready` | Complete; currently reports the missing credentials that block full live production operation |
 | Live external service verification | `scripts/live-services-smoke.mjs`, `npm run verify:live-services` | Complete as a post-credential smoke gate; currently blocked by missing Anthropic, WHOOP, and Oura credentials |
 | Production secret application | `scripts/configure-production-secrets.mjs`, `npm run configure:production-secrets` | Complete as a post-credential setup command; cannot apply missing credentials until they are provided in the shell |
+| Render Blueprint validation | `render.yaml`, `scripts/render-readiness.mjs`, `npm run verify:render` | Complete as a repeatable gate; full Render API/CLI validation and deployment remain blocked without Render access |
 | Render backend hosting | `render.yaml`; local env check for `RENDER_API_KEY`/`RENDER_TOKEN` | Config present; Netlify Functions now hosts the required API path for this demo; Render deploy remains blocked without Render deployment access |
 | Dashboard cards and live queries | `client/src/pages/Dashboard.tsx`, Convex dashboard query refs | Complete; Sleep card includes a 7-day sparkline |
 | Sleep module | `convex/sleep.ts`, `client/src/pages/Sleep.tsx`, `npm run verify:data` | Complete; page includes HRV chart, sleep-stage chart, manual entry, and sortable sessions table |

@@ -14,6 +14,7 @@ Current audit status as of 2026-05-05:
 - `npm run verify:oauth` validates OAuth state completion and replay rejection.
 - `npm run verify:production-ready` checks whether the required Convex, Netlify, and local deployment/provider credentials are present without printing secret values.
 - `npm run verify:live-services` validates live Claude output, nutrition AI scan, bloodwork PDF extraction, and WHOOP/Oura auth starts after the required credentials are configured.
+- `npm run verify:render` checks the Render Blueprint locally and validates it with the Render CLI or Validate Blueprint API when Render credentials are available.
 - `npm run configure:production-secrets -- --dry-run` previews which Convex/Netlify production variables will be set from the current shell; omit `-- --dry-run` to apply them.
 - Draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on `codex/agents-implementation`, and GitHub Actions CI run `25372876003` passed install, typecheck, build, and dependency audit on the current PR head.
 - Netlify is linked to `phenoagent-demo` and serves the client bundle with the public `/demo` route.
@@ -45,7 +46,7 @@ Complete these items to turn the demo into a fully live connected app.
 - `GET /api/health` returns `{"ok":true,"service":"phenoagent-netlify-api"}`.
 - Set hosted API `ANTHROPIC_API_KEY` before expecting live Claude output.
 - To apply available shell credentials to production, export the relevant variables locally and run `npm run configure:production-secrets`, then run `npm run verify:production-ready`.
-- `render.yaml` is present for the separate Express server, but a Render deploy requires Render account/API access plus the server secret environment variables.
+- `render.yaml` is present for the separate Express server; run `npm run verify:render` after installing the Render CLI or setting `RENDER_API_KEY`/`RENDER_OWNER_ID`.
 
 ## Provider Integrations
 
