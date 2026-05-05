@@ -13,7 +13,7 @@ Current audit status as of 2026-05-05:
 - `npm run verify:api` validates the hosted Netlify `/api/pheno/chat` SSE path and Convex persistence.
 - `npm run verify:oauth` validates OAuth state completion and replay rejection.
 - `npm run verify:production-ready` checks whether the required Convex, Netlify, and local deployment/provider credentials are present without printing secret values.
-- `.github/workflows/ci.yml` is ready for GitHub-backed typecheck/build/audit validation once this implementation is published to the GitHub repo.
+- Draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on `codex/agents-implementation`, and GitHub Actions CI run `25372089574` passed install, typecheck, build, and dependency audit.
 - Netlify is linked to `phenoagent-demo` and serves the client bundle with the public `/demo` route.
 - Netlify has `VITE_CONVEX_URL`, `VITE_API_BASE_URL`, `CONVEX_URL`, and `CLIENT_ORIGIN` set for the production demo.
 - Netlify has `WHOOP_REDIRECT_URI` and `OURA_REDIRECT_URI` set to the live hosted callback URLs.
@@ -62,4 +62,4 @@ Complete these items to turn the demo into a fully live connected app.
 - Ask Pheno a question and confirm SSE streaming completes.
 - Upload a lab PDF and confirm parsed biomarkers can be reviewed and saved.
 - Connect WHOOP and Oura test accounts, then run sync from `/integrations`.
-- Connect Netlify to the confirmed GitHub repo/branch for automatic production deploys after the repository contents are approved.
+- Approve/merge draft PR #1, then connect Netlify to the confirmed GitHub repo/branch for automatic production deploys after the repository contents are approved.

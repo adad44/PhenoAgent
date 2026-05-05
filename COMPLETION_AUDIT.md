@@ -36,7 +36,8 @@ Live demo:
 - `npm run verify:api` created a disposable password account, called the hosted Netlify `/api/pheno/chat` SSE route with a bearer token, and confirmed the exchange persisted to Convex.
 - `npm run verify:oauth` created a disposable password account, created an OAuth state, completed an integration with fake provider tokens, and confirmed replay protection.
 - `npm run verify:production-ready` checks Convex production, Netlify production, and local deploy/provider credential presence without printing secret values; it currently fails because external credentials and Render deploy access are absent.
-- `.github/workflows/ci.yml` provides GitHub-backed typecheck, build, and dependency audit validation once this implementation is published to the confirmed GitHub repo/branch.
+- GitHub draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on branch `codex/agents-implementation` without changing `main`.
+- GitHub Actions CI run `25372089574` passed for PR #1: install, typecheck, build, and dependency audit completed successfully.
 - Production Convex `SITE_URL` is set to `https://phenoagent-demo.netlify.app`; the dev Convex deployment remains pointed at `http://localhost:5173` for local development.
 - `CONVEX_DEPLOYMENT=prod:nautical-seahorse-122 npx convex deploy --typecheck try --message "Fix Convex Auth user IDs for health data writes"` succeeded after changing `convex/lib.ts` to use `getAuthUserId`.
 - `CONVEX_DEPLOYMENT=prod:nautical-seahorse-122 npx convex deploy --typecheck try --message "Add OAuth state storage for hosted integrations"` succeeded.
@@ -91,7 +92,7 @@ Live demo:
 | Claude model `claude-sonnet-4-20250514` | `server/src/services/anthropic.ts`, `convex/pheno.ts`, `convex/bloodwork.ts`, `convex/nutrition.ts` | Complete; live calls require `ANTHROPIC_API_KEY` |
 | Charts with Recharts | `client/src/components/charts/*`, page usage | Complete |
 | Netlify frontend hosting | `netlify.toml`, linked `phenoagent-demo`, verified live URL | Complete for public demo and live Convex client |
-| GitHub-backed validation | `.github/workflows/ci.yml` | CI workflow is present locally; publishing/connecting it to the existing public GitHub repo requires confirmation because the remote currently contains an older `backend`/`frontend` layout |
+| GitHub-backed validation | `.github/workflows/ci.yml`, draft PR #1, Actions run `25372089574` | Complete on a non-destructive draft PR branch; merge/Netlify Git linkage still requires user approval because it replaces the older public repo layout |
 | Repeatable verification | `scripts/verify.sh`, `npm run verify` | Complete |
 | Production credential readiness check | `scripts/production-readiness.mjs`, `npm run verify:production-ready` | Complete; currently reports the missing credentials that block full live production operation |
 | Render backend hosting | `render.yaml`; local env check for `RENDER_API_KEY`/`RENDER_TOKEN` | Config present; Netlify Functions now hosts the required API path for this demo; Render deploy remains blocked without Render deployment access |
@@ -121,7 +122,7 @@ These are required for full live production operation but cannot be completed wi
 - Validate PDF biomarker extraction, WHOOP sync, and Oura sync with real credentials/test accounts.
 - Obtain Garmin Health API approval before enabling Garmin OAuth.
 - Provide Render deployment access if the separate AGENTS-specified Express host must be live on Render in addition to the already-live Netlify Functions API.
-- Confirm whether to replace or branch from the existing public GitHub repo `adad44/PhenoAgent`, which currently contains an older `backend`/`frontend` layout, before enabling GitHub-based Netlify CI/CD from this implementation.
+- Approve merge of draft PR https://github.com/adad44/PhenoAgent/pull/1 and connect Netlify to that GitHub branch/repo if Git-based CI/CD should replace the current manual Netlify deployment.
 
 ## Completion Decision
 
