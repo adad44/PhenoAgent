@@ -14,9 +14,9 @@ Current audit status as of 2026-05-05:
 - `npm run verify:oauth` validates OAuth state completion and replay rejection.
 - `npm run verify:production-ready` checks whether the required Convex, Netlify, and local deployment/provider credentials are present without printing secret values.
 - `npm run verify:live-services` validates live Claude output, nutrition AI scan, bloodwork PDF extraction, and WHOOP/Oura auth starts after the required credentials are configured.
-- Draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on `codex/agents-implementation`, and GitHub Actions CI run `25372263249` passed install, typecheck, build, and dependency audit on the current PR head.
+- Draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on `codex/agents-implementation`, and GitHub Actions CI run `25372721272` passed install, typecheck, build, and dependency audit on the current PR head.
 - Netlify is linked to `phenoagent-demo` and serves the client bundle with the public `/demo` route.
-- Netlify site API currently reports no connected Git repository, so production deploys are manual until Git-based CI/CD is explicitly connected.
+- Netlify site API reports Git-linked builds from `https://github.com/adad44/PhenoAgent` branch `codex/agents-implementation`.
 - Netlify has `VITE_CONVEX_URL`, `VITE_API_BASE_URL`, `CONVEX_URL`, and `CLIENT_ORIGIN` set for the production demo.
 - Netlify has `WHOOP_REDIRECT_URI` and `OURA_REDIRECT_URI` set to the live hosted callback URLs.
 - Convex production functions and Auth keys are deployed to `https://nautical-seahorse-122.convex.cloud`.
@@ -65,4 +65,4 @@ Complete these items to turn the demo into a fully live connected app.
 - Upload a lab PDF and confirm parsed biomarkers can be reviewed and saved.
 - Connect WHOOP and Oura test accounts, then run sync from `/integrations`.
 - Run `npm run verify:live-services` after setting Anthropic, WHOOP, and Oura credentials.
-- Approve/merge draft PR #1, then connect Netlify to the confirmed GitHub repo/branch for automatic production deploys after the repository contents are approved.
+- After PR #1 is approved/merged, switch Netlify from branch `codex/agents-implementation` to the final production branch if `main` should become the long-term deployment source.
