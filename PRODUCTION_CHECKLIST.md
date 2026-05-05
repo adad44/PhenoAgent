@@ -13,8 +13,9 @@ Current audit status as of 2026-05-05:
 - `npm run verify:api` validates the hosted Netlify `/api/pheno/chat` SSE path and Convex persistence.
 - `npm run verify:oauth` validates OAuth state completion and replay rejection.
 - `npm run verify:production-ready` checks whether the required Convex, Netlify, and local deployment/provider credentials are present without printing secret values.
-- Draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on `codex/agents-implementation`, and GitHub Actions CI run `25372089574` passed install, typecheck, build, and dependency audit.
+- Draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on `codex/agents-implementation`, and GitHub Actions CI run `25372148791` passed install, typecheck, build, and dependency audit on the current PR head.
 - Netlify is linked to `phenoagent-demo` and serves the client bundle with the public `/demo` route.
+- Netlify site API currently reports no connected Git repository, so production deploys are manual until Git-based CI/CD is explicitly connected.
 - Netlify has `VITE_CONVEX_URL`, `VITE_API_BASE_URL`, `CONVEX_URL`, and `CLIENT_ORIGIN` set for the production demo.
 - Netlify has `WHOOP_REDIRECT_URI` and `OURA_REDIRECT_URI` set to the live hosted callback URLs.
 - Convex production functions and Auth keys are deployed to `https://nautical-seahorse-122.convex.cloud`.

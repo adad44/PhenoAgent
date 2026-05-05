@@ -37,7 +37,7 @@ Live demo:
 - `npm run verify:oauth` created a disposable password account, created an OAuth state, completed an integration with fake provider tokens, and confirmed replay protection.
 - `npm run verify:production-ready` checks Convex production, Netlify production, and local deploy/provider credential presence without printing secret values; it currently fails because external credentials and Render deploy access are absent.
 - GitHub draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on branch `codex/agents-implementation` without changing `main`.
-- GitHub Actions CI run `25372089574` passed for PR #1: install, typecheck, build, and dependency audit completed successfully.
+- GitHub Actions CI run `25372148791` passed for the current PR #1 head: install, typecheck, build, and dependency audit completed successfully.
 - Production Convex `SITE_URL` is set to `https://phenoagent-demo.netlify.app`; the dev Convex deployment remains pointed at `http://localhost:5173` for local development.
 - `CONVEX_DEPLOYMENT=prod:nautical-seahorse-122 npx convex deploy --typecheck try --message "Fix Convex Auth user IDs for health data writes"` succeeded after changing `convex/lib.ts` to use `getAuthUserId`.
 - `CONVEX_DEPLOYMENT=prod:nautical-seahorse-122 npx convex deploy --typecheck try --message "Add OAuth state storage for hosted integrations"` succeeded.
@@ -68,6 +68,7 @@ Live demo:
 - The shipped JS bundle does not contain `localhost:4000` or `127.0.0.1:3210`.
 - Netlify has `VITE_CONVEX_URL`, `VITE_API_BASE_URL`, `CONVEX_URL`, and `CLIENT_ORIGIN` configured for `phenoagent-demo`.
 - Netlify has `WHOOP_REDIRECT_URI` and `OURA_REDIRECT_URI` configured for the hosted callback URLs.
+- Netlify site API reports `repo_url`, `build_settings.repo_url`, and `published_deploy.commit_ref` as null, so the current verified deploy is manual rather than Git-linked CI/CD.
 - Current shell and Netlify environment checks still do not provide `ANTHROPIC_API_KEY`, WHOOP client credentials, Oura client credentials, Garmin credentials, or a Render API token.
 
 ## Prompt-to-Artifact Checklist
@@ -91,8 +92,8 @@ Live demo:
 | Hosted API surface | `netlify/functions/api.mjs`, Netlify deploy `69f9c7e2fc98b13a39c8d428`, `npm run verify:api` | Complete for health, Pheno SSE path, and credential-ready WHOOP/Oura routing; uses Netlify env access with local fallback; AI/provider secrets still required for live Claude/OAuth |
 | Claude model `claude-sonnet-4-20250514` | `server/src/services/anthropic.ts`, `convex/pheno.ts`, `convex/bloodwork.ts`, `convex/nutrition.ts` | Complete; live calls require `ANTHROPIC_API_KEY` |
 | Charts with Recharts | `client/src/components/charts/*`, page usage | Complete |
-| Netlify frontend hosting | `netlify.toml`, linked `phenoagent-demo`, verified live URL | Complete for public demo and live Convex client |
-| GitHub-backed validation | `.github/workflows/ci.yml`, draft PR #1, Actions run `25372089574` | Complete on a non-destructive draft PR branch; merge/Netlify Git linkage still requires user approval because it replaces the older public repo layout |
+| Netlify frontend hosting | `netlify.toml`, linked `phenoagent-demo`, verified live URL | Complete for public demo and live Convex client; Git-linked CI/CD is not active because Netlify reports no connected repository |
+| GitHub-backed validation | `.github/workflows/ci.yml`, draft PR #1, Actions run `25372148791` | Complete on a non-destructive draft PR branch; merge/Netlify Git linkage still requires user approval because it replaces the older public repo layout |
 | Repeatable verification | `scripts/verify.sh`, `npm run verify` | Complete |
 | Production credential readiness check | `scripts/production-readiness.mjs`, `npm run verify:production-ready` | Complete; currently reports the missing credentials that block full live production operation |
 | Render backend hosting | `render.yaml`; local env check for `RENDER_API_KEY`/`RENDER_TOKEN` | Config present; Netlify Functions now hosts the required API path for this demo; Render deploy remains blocked without Render deployment access |
