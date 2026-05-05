@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: phenoagent-server
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: PORT
+        value: 4000
+      - key: CLIENT_ORIGIN
+        value: https://phenoagent-demo.netlify.app
+      - key: CONVEX_URL
+        sync: false
+      - key: CONVEX_DEPLOY_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: WHOOP_CLIENT_ID
+        sync: false
+      - key: WHOOP_CLIENT_SECRET
+        sync: false
+      - key: WHOOP_REDIRECT_URI
+        sync: false
+      - key: OURA_CLIENT_ID
+        sync: false
+      - key: OURA_CLIENT_SECRET
+        sync: false
+      - key: OURA_REDIRECT_URI
+        sync: false
+      - key: GARMIN_CONSUMER_KEY
+        sync: false
+      - key: GARMIN_CONSUMER_SECRET
+        sync: false

@@ -1,0 +1,30 @@
+{
+  "name": "phenoagent",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "install:all": "npm install --prefix client && npm install --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "build": "npm run build --prefix client && npm run build --prefix server",
+    "typecheck": "npm run typecheck --prefix client && npm run typecheck --prefix server",
+    "verify": "bash scripts/verify.sh",
+    "verify:auth": "node scripts/auth-smoke.mjs",
+    "verify:data": "node scripts/data-smoke.mjs",
+    "verify:api": "node scripts/hosted-api-smoke.mjs",
+    "verify:oauth": "node scripts/oauth-state-smoke.mjs",
+    "verify:production-ready": "node scripts/production-readiness.mjs"
+  },
+  "dependencies": {
+    "@auth/core": "latest",
+    "@convex-dev/auth": "latest",
+    "convex": "latest",
+    "pdf-parse": "^1.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.17",
+    "@types/pdf-parse": "^1.1.5",
+    "typescript": "^5.9.3"
+  }
+}

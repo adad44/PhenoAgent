@@ -1,0 +1,17 @@
+import { convexAuth } from "@convex-dev/auth/server";
+import Google from "@auth/core/providers/google";
+import { Password } from "@convex-dev/auth/providers/Password";
+
+const googleProvider = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+  ? Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    })
+  : null;
+
+export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
+  providers: [
+    Password,
+    ...(googleProvider ? [googleProvider] : []),
+  ],
+});
