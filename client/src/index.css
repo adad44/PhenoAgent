@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-base: #080A0F;
+  --bg-surface: #0F1218;
+  --bg-elevated: #161B24;
+  --border: #1E2530;
+  --border-accent: #2A3545;
+  --text-primary: #E8EDF5;
+  --text-secondary: #8A95A3;
+  --text-muted: #4A5568;
+  --accent-green: #00E5A0;
+  --accent-blue: #3B82F6;
+  --accent-amber: #F59E0B;
+  --accent-red: #EF4444;
+  --accent-purple: #8B5CF6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: "DM Sans", system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+.number {
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-grid line {
+  stroke: #1e2530;
+}
