@@ -37,8 +37,9 @@ Live demo:
 - `npm run verify:oauth` created a disposable password account, created an OAuth state, completed an integration with fake provider tokens, and confirmed replay protection.
 - `npm run verify:production-ready` checks Convex production, Netlify production, and local deploy/provider credential presence without printing secret values; it currently fails because external credentials and Render deploy access are absent.
 - `npm run verify:live-services` is present for post-credential validation of live Claude output, nutrition AI scan, bloodwork PDF extraction, and WHOOP/Oura auth starts; it is expected to fail until Anthropic and provider credentials are configured.
+- `npm run configure:production-secrets` is present to apply available shell-provided credentials to Convex and Netlify production without printing secret values; `-- --dry-run` previews the variable names only.
 - GitHub draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on branch `codex/agents-implementation` without changing `main`.
-- GitHub Actions CI run `25372721272` passed for the current PR #1 head: install, typecheck, build, and dependency audit completed successfully.
+- GitHub Actions CI run `25372876003` passed for the current PR #1 head: install, typecheck, build, and dependency audit completed successfully.
 - Production Convex `SITE_URL` is set to `https://phenoagent-demo.netlify.app`; the dev Convex deployment remains pointed at `http://localhost:5173` for local development.
 - `CONVEX_DEPLOYMENT=prod:nautical-seahorse-122 npx convex deploy --typecheck try --message "Fix Convex Auth user IDs for health data writes"` succeeded after changing `convex/lib.ts` to use `getAuthUserId`.
 - `CONVEX_DEPLOYMENT=prod:nautical-seahorse-122 npx convex deploy --typecheck try --message "Add OAuth state storage for hosted integrations"` succeeded.
@@ -70,7 +71,7 @@ Live demo:
 - Netlify has `VITE_CONVEX_URL`, `VITE_API_BASE_URL`, `CONVEX_URL`, and `CLIENT_ORIGIN` configured for `phenoagent-demo`.
 - Netlify has `WHOOP_REDIRECT_URI` and `OURA_REDIRECT_URI` configured for the hosted callback URLs.
 - Netlify site API now reports Git-linked build settings for `https://github.com/adad44/PhenoAgent`, branch `codex/agents-implementation`, command `npm ci --prefix client && npm run build --prefix client`, and publish directory `client/dist`.
-- Netlify published deploy `69f9cf45ae052e087c8dc355` is ready from branch `codex/agents-implementation` at commit `77d5cacac58fd21bf09dfff91826888c359219c2`.
+- Netlify published deploy `69f9d00de3d29900087aab9e` is ready from branch `codex/agents-implementation` at commit `33b6977f5a903962dcb808e76b8e7459715ecd9f`.
 - Current shell and Netlify environment checks still do not provide `ANTHROPIC_API_KEY`, WHOOP client credentials, Oura client credentials, Garmin credentials, or a Render API token.
 
 ## Prompt-to-Artifact Checklist
@@ -95,10 +96,11 @@ Live demo:
 | Claude model `claude-sonnet-4-20250514` | `server/src/services/anthropic.ts`, `convex/pheno.ts`, `convex/bloodwork.ts`, `convex/nutrition.ts` | Complete; live calls require `ANTHROPIC_API_KEY` |
 | Charts with Recharts | `client/src/components/charts/*`, page usage | Complete |
 | Netlify frontend hosting | `netlify.toml`, linked `phenoagent-demo`, verified live URL | Complete for public demo and live Convex client; Git-linked CI/CD is active against branch `codex/agents-implementation` |
-| GitHub-backed validation | `.github/workflows/ci.yml`, draft PR #1, Actions run `25372721272` | Complete on a non-destructive draft PR branch; merge/Netlify Git linkage still requires user approval because it replaces the older public repo layout |
+| GitHub-backed validation | `.github/workflows/ci.yml`, draft PR #1, Actions run `25372876003` | Complete on a non-destructive draft PR branch; merge/Netlify Git linkage still requires user approval because it replaces the older public repo layout |
 | Repeatable verification | `scripts/verify.sh`, `npm run verify` | Complete |
 | Production credential readiness check | `scripts/production-readiness.mjs`, `npm run verify:production-ready` | Complete; currently reports the missing credentials that block full live production operation |
 | Live external service verification | `scripts/live-services-smoke.mjs`, `npm run verify:live-services` | Complete as a post-credential smoke gate; currently blocked by missing Anthropic, WHOOP, and Oura credentials |
+| Production secret application | `scripts/configure-production-secrets.mjs`, `npm run configure:production-secrets` | Complete as a post-credential setup command; cannot apply missing credentials until they are provided in the shell |
 | Render backend hosting | `render.yaml`; local env check for `RENDER_API_KEY`/`RENDER_TOKEN` | Config present; Netlify Functions now hosts the required API path for this demo; Render deploy remains blocked without Render deployment access |
 | Dashboard cards and live queries | `client/src/pages/Dashboard.tsx`, Convex dashboard query refs | Complete; Sleep card includes a 7-day sparkline |
 | Sleep module | `convex/sleep.ts`, `client/src/pages/Sleep.tsx`, `npm run verify:data` | Complete; page includes HRV chart, sleep-stage chart, manual entry, and sortable sessions table |

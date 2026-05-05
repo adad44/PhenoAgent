@@ -14,7 +14,8 @@ Current audit status as of 2026-05-05:
 - `npm run verify:oauth` validates OAuth state completion and replay rejection.
 - `npm run verify:production-ready` checks whether the required Convex, Netlify, and local deployment/provider credentials are present without printing secret values.
 - `npm run verify:live-services` validates live Claude output, nutrition AI scan, bloodwork PDF extraction, and WHOOP/Oura auth starts after the required credentials are configured.
-- Draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on `codex/agents-implementation`, and GitHub Actions CI run `25372721272` passed install, typecheck, build, and dependency audit on the current PR head.
+- `npm run configure:production-secrets -- --dry-run` previews which Convex/Netlify production variables will be set from the current shell; omit `-- --dry-run` to apply them.
+- Draft PR https://github.com/adad44/PhenoAgent/pull/1 publishes this implementation on `codex/agents-implementation`, and GitHub Actions CI run `25372876003` passed install, typecheck, build, and dependency audit on the current PR head.
 - Netlify is linked to `phenoagent-demo` and serves the client bundle with the public `/demo` route.
 - Netlify site API reports Git-linked builds from `https://github.com/adad44/PhenoAgent` branch `codex/agents-implementation`.
 - Netlify has `VITE_CONVEX_URL`, `VITE_API_BASE_URL`, `CONVEX_URL`, and `CLIENT_ORIGIN` set for the production demo.
@@ -43,6 +44,7 @@ Complete these items to turn the demo into a fully live connected app.
 - `VITE_API_BASE_URL` points to `https://phenoagent-demo.netlify.app`.
 - `GET /api/health` returns `{"ok":true,"service":"phenoagent-netlify-api"}`.
 - Set hosted API `ANTHROPIC_API_KEY` before expecting live Claude output.
+- To apply available shell credentials to production, export the relevant variables locally and run `npm run configure:production-secrets`, then run `npm run verify:production-ready`.
 - `render.yaml` is present for the separate Express server, but a Render deploy requires Render account/API access plus the server secret environment variables.
 
 ## Provider Integrations
