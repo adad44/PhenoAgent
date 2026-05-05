@@ -14,7 +14,8 @@
     "verify:data": "node scripts/data-smoke.mjs",
     "verify:api": "node scripts/hosted-api-smoke.mjs",
     "verify:oauth": "node scripts/oauth-state-smoke.mjs",
-    "verify:production-ready": "node scripts/production-readiness.mjs"
+    "verify:production-ready": "node scripts/production-readiness.mjs",
+    "verify:live-services": "node scripts/live-services-smoke.mjs"
   },
   "dependencies": {
     "@auth/core": "latest",
